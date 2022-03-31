@@ -1,27 +1,39 @@
 #include "Fixed.hpp"
 
-Fixed::Fixed() {}
+int const Fixed::m_floatPartBits = 8;
 
-Fixed::~Fixed() {}
+Fixed::Fixed() : m_nb(0) {
 
-Fixed::Fixed(int const nb) {
-
-	m_nb = nb;
+	std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(float const nb) {
+Fixed::Fixed(Fixed const & src) {
 
-	m_nb = nb;
+	std::cout << "Copy constructor called" << std::endl;
+	this->m_nb = src.getRawBits();
 }
+
+Fixed::~Fixed() {
+
+	std::cout << "Destructor called" << std::endl;
+}
+
 
 Fixed& Fixed::operator=(Fixed const &rhs) {
 
-	this->m_nb = rhs.m_nb;
+	std::cout << "Copy assignment operator called" << std::endl;
+	this->m_nb = rhs.getRawBits();
 	return *this;
 }
 
-std::ostream& operator<<(std::ostream& out, Fixed const &rhs) {
+int Fixed::getRawBits() const {
 
-	out << rhs.m_nb;
-	return out;
+	std::cout << "getRaWBits member function called" << std::endl;
+	return m_nb;
+}
+
+void Fixed::setRawBits(const int raw) {
+
+	std::cout << "setRawBits member function called" << std::endl;
+	m_nb = raw;
 }
